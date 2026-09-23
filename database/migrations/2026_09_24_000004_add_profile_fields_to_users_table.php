@@ -1,0 +1,48 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('phone')->nullable()->after('password');
+            $table->char('nik', 16)->nullable()->after('phone');
+            $table->foreignId('work_unit_id')->nullable()->after('nik')->constrained('work_units')->nullOnDelete();
+            $table->foreignId('district_id')->nullable()->after('work_unit_id')->constrained('districts')->nullOnDelete();
+            $table->foreignId('village_id')->nullable()->after('district_id')->constrained('villages')->nullOnDelete();
+            $table->boolean('is_active')->default(true)->after('village_id');
+            $table->softDeletes()->after('updated_at');
+
+            $table->index('nik');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['work_unit_id']);
+            $table->dropForeign(['district_id']);
+            $table->dropForeign(['village_id']);
+            $table->dropIndex(['nik']);
+            $table->dropColumn([
+                'phone',
+                'nik',
+                'work_unit_id',
+                'district_id',
+                'village_id',
+                'is_active',
+                'deleted_at',
+            ]);
+        });
+    }
+};
