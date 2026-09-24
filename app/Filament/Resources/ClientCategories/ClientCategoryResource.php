@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Filament\Resources\ClientCategories;
+
+use App\Filament\Resources\ClientCategories\Pages\CreateClientCategory;
+use App\Filament\Resources\ClientCategories\Pages\EditClientCategory;
+use App\Filament\Resources\ClientCategories\Pages\ListClientCategories;
+use App\Filament\Resources\ClientCategories\Schemas\ClientCategoryForm;
+use App\Filament\Resources\ClientCategories\Tables\ClientCategoriesTable;
+use App\Models\ClientCategory;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use UnitEnum;
+
+class ClientCategoryResource extends Resource
+{
+    protected static ?string $model = ClientCategory::class;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Data Master';
+
+    protected static ?string $modelLabel = 'Kategori Klien Rehsos';
+
+    protected static ?string $pluralModelLabel = 'Master Kategori Klien';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHeart;
+
+    public static function form(Schema $schema): Schema
+    {
+        return ClientCategoryForm::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return ClientCategoriesTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListClientCategories::route('/'),
+            'create' => CreateClientCategory::route('/create'),
+            'edit' => EditClientCategory::route('/{record}/edit'),
+        ];
+    }
+}

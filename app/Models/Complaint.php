@@ -42,6 +42,21 @@ class Complaint extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::creating(function (Complaint $complaint) {
+            if (empty($complaint->complaint_number)) {
+                $complaint->complaint_number = NumberSequence::generate('ADU');
+            }
+            if (empty($complaint->reported_at)) {
+                $complaint->reported_at = now();
+            }
+            if (empty($complaint->status)) {
+                $complaint->status = ComplaintStatus::RECEIVED;
+            }
+        });
+    }
+
     public function scopeStatus(Builder $query, ComplaintStatus|string $status): Builder
     {
         return $query->where('status', $status);

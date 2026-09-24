@@ -34,6 +34,11 @@ class ServiceRequestDocument extends Model
 
     public function serviceRequirement(): BelongsTo
     {
-        return $this->belongsTo(ServiceRequirement::class);
+        return $this->belongsTo(ServiceRequirement::class, 'service_requirement_id');
+    }
+
+    public function requirement(): BelongsTo
+    {
+        return $this->serviceRequirement();
     }
 }

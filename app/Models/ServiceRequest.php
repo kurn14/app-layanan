@@ -49,6 +49,22 @@ class ServiceRequest extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::creating(function (ServiceRequest $request) {
+            if (empty($request->request_number)) {
+                $prefix = $request->serviceType?->code ?? 'REQ';
+                $request->request_number = NumberSequence::generate($prefix);
+            }
+            if (empty($request->submitted_at)) {
+                $request->submitted_at = now();
+            }
+            if (empty($request->status)) {
+                $request->status = ServiceRequestStatus::SUBMITTED;
+            }
+        });
+    }
+
     public function scopePriority(Builder $query): Builder
     {
         return $query->where('is_priority', true);

@@ -39,6 +39,21 @@ class RehabilitationCase extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::creating(function (RehabilitationCase $case) {
+            if (empty($case->case_number)) {
+                $case->case_number = NumberSequence::generate('RHS');
+            }
+            if (empty($case->received_at)) {
+                $case->received_at = now();
+            }
+            if (empty($case->status)) {
+                $case->status = RehabilitationCaseStatus::RECEIVED;
+            }
+        });
+    }
+
     public function scopeStatus(Builder $query, RehabilitationCaseStatus|string $status): Builder
     {
         return $query->where('status', $status);

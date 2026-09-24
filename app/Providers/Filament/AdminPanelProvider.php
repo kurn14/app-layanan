@@ -28,8 +28,16 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('SAPA SOSIAL — Kab. Blitar')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Teal,
+            ])
+            ->sidebarCollapsibleOnDesktop()
+            ->navigationGroups([
+                'Layanan Sosial',
+                'Pusat Informasi',
+                'Data Master',
+                'Pengguna & Sistem',
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
