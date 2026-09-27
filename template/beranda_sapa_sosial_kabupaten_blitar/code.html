@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SAPA SOSIAL — Satu Pintu Layanan Sosial Kabupaten Blitar</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration directly matching requirements -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#80d5cb",
+            "on-primary": "#ffffff",
+            "surface-tint": "#006a63",
+            "on-error-container": "#93000a",
+            "status-info": "#0284C7",
+            "on-tertiary-fixed-variant": "#653e00",
+            "secondary-fixed": "#d5e3ff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#001c3b",
+            "on-tertiary-container": "#ffe6cc",
+            "background": "#f8f9ff",
+            "on-secondary-container": "#465c7f",
+            "primary": "#005c55",
+            "on-tertiary-fixed": "#2a1700",
+            "secondary-container": "#bfd5fe",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-fixed-variant": "#314769",
+            "status-error": "#EF4444",
+            "canvas-bg": "#F8FAFC",
+            "tertiary-container": "#945d00",
+            "primary-container": "#0f766e",
+            "tertiary-fixed-dim": "#ffb95f",
+            "primary-fixed-dim": "#80d5cb",
+            "outline-variant": "#bdc9c6",
+            "on-secondary": "#ffffff",
+            "status-warning": "#F59E0B",
+            "on-primary-fixed": "#00201d",
+            "on-primary-fixed-variant": "#00504a",
+            "tertiary": "#734700",
+            "on-primary-container": "#a3faef",
+            "surface-bright": "#f8f9ff",
+            "tertiary-fixed": "#ffddb8",
+            "surface-card": "#FFFFFF",
+            "surface-container-highest": "#d3e4fe",
+            "on-background": "#0b1c30",
+            "surface-container-high": "#dce9ff",
+            "surface": "#f8f9ff",
+            "surface-container-low": "#eff4ff",
+            "error": "#ba1a1a",
+            "surface-container": "#e5eeff",
+            "inverse-on-surface": "#eaf1ff",
+            "on-surface-variant": "#3e4947",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#d3e4fe",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#b1c7f0",
+            "inverse-surface": "#213145",
+            "secondary": "#495f82",
+            "on-surface": "#0b1c30",
+            "primary-fixed": "#9cf2e8",
+            "status-success": "#10B981",
+            "outline": "#6e7977"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1rem",
+            "space-md": "1rem",
+            "gutter": "1rem",
+            "space-lg": "1.5rem",
+            "margin-tablet": "2rem",
+            "gutter-desktop": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin-desktop": "3rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "caption": ["Plus Jakarta Sans"],
+            "body-medium": ["Plus Jakarta Sans"],
+            "body-default": ["Plus Jakarta Sans"],
+            "display-hero-mobile": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "code-tracking": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "display-hero": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "body-lg-accessible": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "caption": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+            "body-medium": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+            "body-default": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "display-hero-mobile": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+            "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "label-lg": ["16px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "code-tracking": ["15px", {"lineHeight": "20px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "display-hero": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+            "body-lg-accessible": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "700"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "700"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-canvas-bg text-on-surface antialiased selection:bg-primary selection:text-on-primary min-h-screen flex flex-col">
+<!-- TOP APP BAR / HEADER (Shared Component Execution) -->
+<header class="docked full-width top-0 sticky z-50 bg-surface-container-lowest dark:bg-inverse-surface shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-space-md md:px-margin-tablet lg:px-margin-desktop max-w-7xl mx-auto h-16">
+<!-- Logo Branding & Emblem -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center font-bold shadow-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="shield">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed tracking-tight">SAPA SOSIAL</span>
+<span class="text-caption font-caption text-on-surface-variant dark:text-inverse-on-surface -mt-1 hidden sm:block">Dinas Sosial Kab. Blitar</span>
+</div>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center space-x-6">
+<!-- Active Nav Item (Beranda) strictly applied style_active_navigation -->
+<a class="border-b-2 border-primary dark:border-primary-fixed text-primary dark:text-primary-fixed font-label-md text-label-md pb-1" href="#">Beranda</a>
+<!-- Inactive items with style_inactive_navigation and style_universal_hover -->
+<a class="text-on-surface-variant dark:text-inverse-on-surface font-label-md text-label-md pb-1 transition-colors duration-200 hover:text-primary dark:hover:text-primary-fixed" href="#layanan">Layanan</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface font-label-md text-label-md pb-1 transition-colors duration-200 hover:text-primary dark:hover:text-primary-fixed" href="#pengaduan">Pengaduan</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface font-label-md text-label-md pb-1 transition-colors duration-200 hover:text-primary dark:hover:text-primary-fixed" href="#cek-status">Cek Status</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface font-label-md text-label-md pb-1 transition-colors duration-200 hover:text-primary dark:hover:text-primary-fixed" href="#verifikasi">Verifikasi Surat</a>
+<a class="text-on-surface-variant dark:text-inverse-on-surface font-label-md text-label-md pb-1 transition-colors duration-200 hover:text-primary dark:hover:text-primary-fixed" href="#faq">Informasi &amp; FAQ</a>
+</nav>
+<!-- Trailing Action: "Masuk" -->
+<div class="flex items-center gap-3">
+<a class="inline-flex items-center justify-center min-h-[48px] px-6 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container active:scale-95 transition-all duration-150 shadow-sm focus:outline-none focus:ring-4 focus:ring-primary/20" href="#login">
+<span class="material-symbols-outlined text-lg mr-1.5" data-icon="login">login</span>
+<span>Masuk</span>
+</a>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- HERO SECTION -->
+<section class="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 bg-gradient-to-b from-surface-container-low/70 to-canvas-bg">
+<div class="max-w-7xl mx-auto px-space-md md:px-margin-tablet lg:px-margin-desktop">
+<!-- Headline Block -->
+<div class="text-center max-w-3xl mx-auto">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary mb-5 border border-primary/20">
+<span class="material-symbols-outlined text-base text-status-warning" data-icon="verified">verified</span>
+<span class="text-caption font-caption font-semibold">Portal Resmi Pelayanan Publik Dinas Sosial Kab. Blitar</span>
+</div>
+<h1 class="text-display-hero-mobile md:text-display-hero font-display-hero text-inverse-surface tracking-tight mb-4">
+            Satu Pintu Layanan Sosial Kabupaten Blitar
+          </h1>
+<p class="text-body-default md:text-body-lg-accessible font-body-default md:font-body-lg-accessible text-on-surface-variant max-w-2xl mx-auto mb-8">
+            Ajukan layanan, sampaikan pengaduan, dan pantau prosesnya secara online — setiap tahapan tercatat dan dapat ditelusuri.
+          </p>
+<!-- Primary CTA Buttons -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+<a class="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] px-7 py-3 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary active:scale-95 transition-all shadow-md" href="#layanan">
+<span class="material-symbols-outlined text-xl mr-2" data-icon="edit_document">edit_document</span>
+              Ajukan Layanan
+            </a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center min-h-[48px] px-7 py-3 rounded-xl bg-surface-card border-2 border-status-warning/80 text-on-surface font-label-lg text-label-lg hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" href="#pengaduan">
+<span class="material-symbols-outlined text-xl text-status-warning mr-2" data-icon="campaign">campaign</span>
+              Sampaikan Pengaduan
+            </a>
+</div>
+</div>
+<!-- TRACKING TICKET BOX (Prominent Directly Below Hero) -->
+<div class="max-w-4xl mx-auto" id="cek-status">
+<div class="bg-surface-card rounded-2xl p-6 md:p-8 shadow-md border border-outline-variant/50 relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary to-status-warning"></div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 pb-4 border-b border-outline-variant/30 gap-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" data-icon="manage_search">manage_search</span>
+</div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-inverse-surface">Lacak Status Pengajuan &amp; Tiket</h2>
+<p class="text-caption font-caption text-on-surface-variant">Ketahui progres berkas Anda kapan saja secara transparan</p>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-status-info/10 text-status-info text-caption font-caption">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+                Privasi Terlindungi (Masking Data)
+              </div>
+</div>
+<!-- Tracking Form -->
+<form class="grid grid-cols-1 md:grid-cols-12 gap-4" onsubmit="event.preventDefault(); simulateTracking();">
+<div class="md:col-span-6">
+<label class="block text-label-md font-label-md text-inverse-surface mb-2" for="ticket-number">
+                  Nomor Tiket Permohonan <span class="text-status-error">*</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-xl" data-icon="confirmation_number">confirmation_number</span>
+</span>
+<input class="w-full min-h-[48px] pl-11 pr-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-body-default font-body-default text-inverse-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" id="ticket-number" placeholder="Contoh: DTSEN-202610-00012" required="" type="text" value="DTSEN-202610-00012"/>
+</div>
+</div>
+<div class="md:col-span-3">
+<label class="block text-label-md font-label-md text-inverse-surface mb-2" for="security-pin">
+                  4 Digit Akhir NIK / HP <span class="text-status-error">*</span>
+</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-xl" data-icon="pin">pin</span>
+</span>
+<input class="w-full min-h-[48px] pl-11 pr-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-body-default font-body-default text-inverse-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all text-center" id="security-pin" maxlength="4" placeholder="9821" required="" type="text" value="9821"/>
+</div>
+</div>
+<div class="md:col-span-3 flex items-end">
+<button class="w-full min-h-[48px] px-5 py-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container active:scale-95 transition-all shadow-sm flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-lg" data-icon="search">search</span>
+                  Lacak Status
+                </button>
+</div>
+</form>
+<!-- Verification & Ticket Tracking Card Demonstration (Dynamic Feedback Simulation) -->
+<div class="mt-6 pt-6 border-t border-outline-variant/30" id="tracking-result">
+<div class="bg-surface-container-low/70 rounded-xl p-4 md:p-5 border border-outline-variant/50 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-status-info"></div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-md bg-surface-card border border-outline-variant text-caption font-code-tracking font-semibold text-inverse-surface">
+                        DTSEN-202610-00012
+                      </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-status-info/15 text-status-info text-caption font-caption font-semibold">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                        Dalam Proses Verifikasi
+                      </span>
+</div>
+<p class="text-body-medium font-body-medium text-inverse-surface">
+                      Surat Keterangan DTSEN (KIP Kuliah) — Pemohon: <span class="font-bold">Siti A**** (NIK: 3505************)</span>
+</p>
+<p class="text-caption font-caption text-on-surface-variant mt-0.5">
+                      Diterima pada: 24 Oktober 2024, 09.30 WIB • Estimasi Selesai: 1-2 Hari Kerja
+                    </p>
+</div>
+<div class="shrink-0 flex items-center gap-2">
+<button class="inline-flex items-center min-h-[48px] px-4 rounded-lg bg-surface-card border border-outline-variant text-primary font-label-md text-label-md hover:bg-surface-container-lowest">
+<span class="material-symbols-outlined text-base mr-1" data-icon="visibility">visibility</span>
+                      Detail Riwayat
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: LAYANAN UTAMA (3 Large Highlighted Cards) -->
+<section class="py-space-xl max-w-7xl mx-auto px-space-md md:px-margin-tablet lg:px-margin-desktop" id="layanan">
+<div class="text-center max-w-2xl mx-auto mb-10">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-inverse-surface mb-2">Layanan Sosial Utama</h2>
+<p class="text-body-default font-body-default text-on-surface-variant">Layanan kependudukan dan kesejahteraan sosial terpadu dengan standar pelayanan transparan dan terukur.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- CARD 1: Surat Keterangan DTSEN -->
+<div class="bg-surface-card rounded-2xl p-6 md:p-7 shadow-sm border border-outline-variant/60 flex flex-col justify-between hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl" data-icon="description">description</span>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-caption font-caption bg-status-success/15 text-status-success font-semibold">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="bolt">bolt</span>
+                1-2 Hari Kerja
+              </span>
+</div>
+<div class="mb-3">
+<span class="text-caption font-caption font-semibold uppercase tracking-wider text-status-warning">Administrasi &amp; Pendidikan</span>
+<h3 class="text-headline-md font-headline-md text-inverse-surface mt-1">Surat Keterangan DTSEN</h3>
+</div>
+<p class="text-body-default font-body-default text-on-surface-variant mb-5">
+              Surat keterangan status &amp; desil DTSEN untuk SPMB, PIP, KIP Kuliah, bansos, dan layanan kesehatan kependudukan.
+            </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Gratis (Rp 0)</span>
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Tanda Tangan Elektronik</span>
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Unduh Mandiri</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 pt-4 border-t border-outline-variant/30">
+<button class="min-h-[48px] px-3 rounded-xl border border-outline-variant text-inverse-surface font-label-md text-label-md hover:bg-surface-container-low flex items-center justify-center">
+              Lihat Persyaratan
+            </button>
+<button class="min-h-[48px] px-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container flex items-center justify-center shadow-sm">
+              Ajukan
+            </button>
+</div>
+</div>
+<!-- CARD 2: Reaktivasi KIS / PBI-JK -->
+<div class="bg-surface-card rounded-2xl p-6 md:p-7 shadow-sm border border-outline-variant/60 flex flex-col justify-between hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-14 h-14 rounded-2xl bg-status-info/10 text-status-info flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-caption font-caption bg-status-info/15 text-status-info font-semibold">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="schedule">schedule</span>
+                3-5 Hari Kerja
+              </span>
+</div>
+<div class="mb-3">
+<span class="text-caption font-caption font-semibold uppercase tracking-wider text-status-info">Jaminan Kesehatan</span>
+<h3 class="text-headline-md font-headline-md text-inverse-surface mt-1">Reaktivasi KIS / PBI-JK</h3>
+</div>
+<p class="text-body-default font-body-default text-on-surface-variant mb-5">
+              Aktifkan kembali kepesertaan JKN-KIS PBI (Penerima Bantuan Iuran) yang dinonaktifkan agar dapat digunakan berobat.
+            </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Integrasi BPJS</span>
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Validasi NIK</span>
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Bebas Biaya</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 pt-4 border-t border-outline-variant/30">
+<button class="min-h-[48px] px-3 rounded-xl border border-outline-variant text-inverse-surface font-label-md text-label-md hover:bg-surface-container-low flex items-center justify-center">
+              Lihat Persyaratan
+            </button>
+<button class="min-h-[48px] px-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container flex items-center justify-center shadow-sm">
+              Ajukan
+            </button>
+</div>
+</div>
+<!-- CARD 3: Rehabilitasi Sosial -->
+<div class="bg-surface-card rounded-2xl p-6 md:p-7 shadow-sm border border-outline-variant/60 flex flex-col justify-between hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-14 h-14 rounded-2xl bg-status-warning/15 text-status-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl" data-icon="diversity_1">diversity_1</span>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-caption font-caption bg-status-warning/20 text-inverse-surface font-semibold">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="emergency">emergency</span>
+                Respon Cepat 24 Jam
+              </span>
+</div>
+<div class="mb-3">
+<span class="text-caption font-caption font-semibold uppercase tracking-wider text-status-warning">Perlindungan Khusus</span>
+<h3 class="text-headline-md font-headline-md text-inverse-surface mt-1">Rehabilitasi Sosial</h3>
+</div>
+<p class="text-body-default font-body-default text-on-surface-variant mb-5">
+              Layanan untuk lansia terlantar, penyandang disabilitas, ODGJ, anak berhadapan hukum, serta korban kekerasan rumahtangga.
+            </p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Pendampingan Ahli</span>
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Rujukan Rumah Singgah</span>
+<span class="px-2.5 py-1 bg-surface-container-low rounded-lg text-caption font-caption text-on-surface">Bantuan Logistik</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 pt-4 border-t border-outline-variant/30">
+<button class="min-h-[48px] px-3 rounded-xl border border-outline-variant text-inverse-surface font-label-md text-label-md hover:bg-surface-container-low flex items-center justify-center">
+              Lihat Persyaratan
+            </button>
+<button class="min-h-[48px] px-3 rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container flex items-center justify-center shadow-sm">
+              Ajukan
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: LAYANAN LAINNYA (Bento Grid of Clean Cards) -->
+<section class="py-12 bg-surface-container-low/40">
+<div class="max-w-7xl mx-auto px-space-md md:px-margin-tablet lg:px-margin-desktop">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+<div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-inverse-surface">Layanan Pendukung Lainnya</h2>
+<p class="text-body-default font-body-default text-on-surface-variant mt-1">Akses cepat menu bantuan sosial, perizinan sosial, dan pusat konsultasi publik.</p>
+</div>
+<a class="inline-flex items-center text-primary font-label-md text-label-md hover:underline" href="#">
+            Semua Modul Layanan <span class="material-symbols-outlined ml-1 text-lg" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<div class="bg-surface-card p-6 rounded-2xl border border-outline-variant/60 hover:border-primary transition-all duration-200 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl" data-icon="folder_shared">folder_shared</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-2">Pengajuan Layanan Sosial Lainnya</h3>
+<p class="text-caption font-caption text-on-surface-variant mb-4">Permohonan bantuan alat bantu disabilitas, kursi roda, dan bantuan tanggap darurat bencana.</p>
+</div>
+<a class="inline-flex items-center text-primary font-label-md text-label-md hover:gap-1.5 transition-all" href="#">
+              Buka Layanan <span class="material-symbols-outlined text-base ml-1" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<div class="bg-surface-card p-6 rounded-2xl border border-outline-variant/60 hover:border-primary transition-all duration-200 shadow-sm flex flex-col justify-between" id="pengaduan">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-status-warning flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl" data-icon="record_voice_over">record_voice_over</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-2">Pengaduan &amp; Laporan Sosial</h3>
+<p class="text-caption font-caption text-on-surface-variant mb-4">Laporkan warga yang butuh bantuan darurat, pungli bansos, atau sengketa data bansos desa.</p>
+</div>
+<a class="inline-flex items-center text-primary font-label-md text-label-md hover:gap-1.5 transition-all" href="#">
+              Tulis Laporan <span class="material-symbols-outlined text-base ml-1" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<div class="bg-surface-card p-6 rounded-2xl border border-outline-variant/60 hover:border-primary transition-all duration-200 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-status-info flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl" data-icon="menu_book">menu_book</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-2">Informasi Layanan &amp; Panduan</h3>
+<p class="text-caption font-caption text-on-surface-variant mb-4">Pedoman pengisian formulir, syarat berkas, dan ketentuan pendaftaran Data Terpadu Kesejahteraan Sosial.</p>
+</div>
+<a class="inline-flex items-center text-primary font-label-md text-label-md hover:gap-1.5 transition-all" href="#">
+              Baca Panduan <span class="material-symbols-outlined text-base ml-1" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<div class="bg-surface-card p-6 rounded-2xl border border-outline-variant/60 hover:border-primary transition-all duration-200 shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high text-status-success flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-2xl" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-2">Verifikasi Keaslian Surat DTSEN</h3>
+<p class="text-caption font-caption text-on-surface-variant mb-4">Uji otentisitas dokumen resmi yang diterbitkan Kepala Dinas Sosial secara online melalui nomor SK.</p>
+</div>
+<a class="inline-flex items-center text-primary font-label-md text-label-md hover:gap-1.5 transition-all" href="#verifikasi">
+              Cek Keabsahan <span class="material-symbols-outlined text-base ml-1" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: BAGAIMANA CARA KERJANYA (4-Step Stepper) -->
+<section class="py-space-xl max-w-7xl mx-auto px-space-md md:px-margin-tablet lg:px-margin-desktop">
+<div class="text-center max-w-2xl mx-auto mb-12">
+<span class="text-caption font-caption font-semibold uppercase tracking-wider text-primary">Prosedur Praktis</span>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-inverse-surface mt-1">Bagaimana Cara Kerjanya?</h2>
+<p class="text-body-default font-body-default text-on-surface-variant mt-2">Hanya membutuhkan 4 langkah mudah tanpa harus mengantre lama di kantor Dinas Sosial.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+<!-- Connecting Line for Desktop -->
+<div class="hidden md:block absolute top-10 left-[12%] right-[12%] h-0.5 bg-outline-variant/40 -z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-2xl bg-surface-card border-2 border-primary shadow-sm flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="touch_app">touch_app</span>
+</div>
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary text-caption font-bold flex items-center justify-center mb-2">1</span>
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-1">Pilih Layanan</h3>
+<p class="text-caption font-caption text-on-surface-variant max-w-xs">
+            Tentukan jenis bantuan atau surat keterangan yang sesuai dengan kebutuhan Anda atau keluarga.
+          </p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-2xl bg-surface-card border-2 border-primary shadow-sm flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="upload_file">upload_file</span>
+</div>
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary text-caption font-bold flex items-center justify-center mb-2">2</span>
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-1">Unggah Dokumen</h3>
+<p class="text-caption font-caption text-on-surface-variant max-w-xs">
+            Isi identitas diri (NIK &amp; No KK) serta lampirkan foto KTP atau surat pengantar desa secara jelas.
+          </p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-2xl bg-surface-card border-2 border-status-warning shadow-sm flex items-center justify-center text-status-warning mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="receipt_long">receipt_long</span>
+</div>
+<span class="w-6 h-6 rounded-full bg-status-warning text-inverse-surface text-caption font-bold flex items-center justify-center mb-2">3</span>
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-1">Nomor Tiket Diterbitkan</h3>
+<p class="text-caption font-caption text-on-surface-variant max-w-xs">
+            Simpan nomor tiket unik yang dikirimkan via SMS / WhatsApp sebagai tanda bukti pendaftaran Anda.
+          </p>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-2xl bg-surface-card border-2 border-status-success shadow-sm flex items-center justify-center text-status-success mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="verified_user">verified_user</span>
+</div>
+<span class="w-6 h-6 rounded-full bg-status-success text-on-primary text-caption font-bold flex items-center justify-center mb-2">4</span>
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-1">Pantau &amp; Unduh Dokumen</h3>
+<p class="text-caption font-caption text-on-surface-variant max-w-xs">
+            Pantau status secara berkala. Dokumen terbit dengan barcode resmi dan siap diunduh langsung.
+          </p>
+</div>
+</div>
+</section>
+<!-- SECTION: BANNER CEK KEASLIAN SURAT DTSEN -->
+<section class="py-10 bg-primary/5" id="verifikasi">
+<div class="max-w-7xl mx-auto px-space-md md:px-margin-tablet lg:px-margin-desktop">
+<div class="bg-gradient-to-r from-primary-container to-inverse-surface rounded-3xl p-8 md:p-12 text-on-primary shadow-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-on-primary/10 text-on-primary-container text-caption font-caption mb-3">
+<span class="material-symbols-outlined text-sm" data-icon="shield">shield</span>
+                Sistem Validasi Tanda Tangan Elektronik (TTE) BSrE
+              </div>
+<h2 class="text-display-hero-mobile md:text-headline-lg font-headline-lg text-on-primary mb-3">
+                Verifikasi Keaslian Surat Keterangan Dinas Sosial
+              </h2>
+<p class="text-body-default font-body-default text-inverse-on-surface mb-4">
+                Setiap dokumen resmi yang diterbitkan dilengkapi dengan QR Code dan nomor seri unik untuk mencegah pemalsuan berkas bantuan sosial dan administrasi pendidikan.
+              </p>
+<div class="flex items-center gap-4 text-caption font-caption text-on-primary-container">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base" data-icon="check_circle">check_circle</span> Terhubung Database Pemkab</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base" data-icon="check_circle">check_circle</span> Cek Realtime</span>
+</div>
+</div>
+<div class="lg:col-span-5 bg-surface-card rounded-2xl p-6 text-on-surface shadow-lg">
+<h3 class="text-headline-sm font-headline-sm text-inverse-surface mb-2">Input Kode / Scan QR Surat</h3>
+<p class="text-caption font-caption text-on-surface-variant mb-4">Masukkan Nomor Registrasi Dokumen (tertera di pojok kanan bawah surat):</p>
+<div class="space-y-3">
+<div class="relative">
+<input class="w-full min-h-[48px] px-4 rounded-xl border border-outline-variant bg-surface-container-lowest font-code-tracking text-body-default focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Contoh: SK-DTSEN/2026/04812" type="text"/>
+</div>
+<button class="w-full min-h-[48px] rounded-xl bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="task_alt">task_alt</span>
+                  Verifikasi Sekarang
+                </button>
+</div>
+<p class="text-center text-caption font-caption text-outline mt-3">
+                Atau gunakan kamera ponsel untuk langsung memindai QR Code pada lembar cetak surat.
+              </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: PERTANYAAN YANG SERING DIAJUKAN (FAQ Accordion) -->
+<section class="py-space-xl max-w-4xl mx-auto px-space-md md:px-margin-tablet" id="faq">
+<div class="text-center mb-10">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-inverse-surface mb-2">Pertanyaan yang Sering Diajukan</h2>
+<p class="text-body-default font-body-default text-on-surface-variant">Penjelasan lengkap mengenai tata kelola dan persyaratan layanan sosial kependudukan.</p>
+</div>
+<div class="space-y-4" id="faq-container">
+<!-- FAQ Item 1 -->
+<div class="bg-surface-card rounded-2xl border border-outline-variant/60 overflow-hidden shadow-sm">
+<button class="w-full min-h-[48px] px-6 py-4 text-left flex items-center justify-between font-headline-sm text-headline-sm text-inverse-surface hover:bg-surface-container-low transition-colors" onclick="toggleFaq(this)">
+<span>Berapa lama proses penerbitan Surat Keterangan DTSEN?</span>
+<span class="material-symbols-outlined text-2xl transition-transform duration-200" data-icon="expand_more">expand_more</span>
+</button>
+<div class="px-6 pb-5 pt-1 text-body-default font-body-default text-on-surface-variant border-t border-outline-variant/30">
+            Proses verifikasi berkas memakan waktu 1 hingga 2 hari kerja setelah dokumen pendaftaran dinyatakan lengkap. Apabila disetujui, pemohon dapat langsung mengunduh surat dalam format PDF ber-barcode resmi melalui portal SAPA SOSIAL.
+          </div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="bg-surface-card rounded-2xl border border-outline-variant/60 overflow-hidden shadow-sm">
+<button class="w-full min-h-[48px] px-6 py-4 text-left flex items-center justify-between font-headline-sm text-headline-sm text-inverse-surface hover:bg-surface-container-low transition-colors" onclick="toggleFaq(this)">
+<span>Apakah ada biaya pengurusan dalam pengajuan bantuan sosial?</span>
+<span class="material-symbols-outlined text-2xl transition-transform duration-200" data-icon="expand_more">expand_more</span>
+</button>
+<div class="px-6 pb-5 pt-1 text-body-default font-body-default text-on-surface-variant border-t border-outline-variant/30 hidden">
+            Seluruh layanan kependudukan dan sosial di Dinas Sosial Kabupaten Blitar bersifat <strong class="text-inverse-surface">100% GRATIS (Rp 0)</strong>. Apabila menemukan pihak yang meminta imbalan atau pungutan liar, harap segera melapor melalui saluran Pengaduan di portal ini.
+          </div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="bg-surface-card rounded-2xl border border-outline-variant/60 overflow-hidden shadow-sm">
+<button class="w-full min-h-[48px] px-6 py-4 text-left flex items-center justify-between font-headline-sm text-headline-sm text-inverse-surface hover:bg-surface-container-low transition-colors" onclick="toggleFaq(this)">
+<span>Apa saja syarat reaktivasi kartu BPJS Kesehatan KIS / PBI-JK?</span>
+<span class="material-symbols-outlined text-2xl transition-transform duration-200" data-icon="expand_more">expand_more</span>
+</button>
+<div class="px-6 pb-5 pt-1 text-body-default font-body-default text-on-surface-variant border-t border-outline-variant/30 hidden">
+            Persyaratan utama meliputi: Foto KTP elektronik atau Kartu Keluarga pemohon, kartu BPJS yang dinonaktifkan, Surat Keterangan Tidak Mampu (SKTM) dari Kelurahan/Desa, dan surat keterangan rawat inap/surat rujukan medis dari fasilitas kesehatan bagi pasien darurat.
+          </div>
+</div>
+<!-- FAQ Item 4 -->
+<div class="bg-surface-card rounded-2xl border border-outline-variant/60 overflow-hidden shadow-sm">
+<button class="w-full min-h-[48px] px-6 py-4 text-left flex items-center justify-between font-headline-sm text-headline-sm text-inverse-surface hover:bg-surface-container-low transition-colors" onclick="toggleFaq(this)">
+<span>Bagaimana jika NIK saya tidak ditemukan di DTKS Kemensos?</span>
+<span class="material-symbols-outlined text-2xl transition-transform duration-200" data-icon="expand_more">expand_more</span>
+</button>
+<div class="px-6 pb-5 pt-1 text-body-default font-body-default text-on-surface-variant border-t border-outline-variant/30 hidden">
+            Warga dapat mengajukan permohonan pemutakhiran data melalui operator desa/kelurahan setempat dalam Musyawarah Desa (Musdes) atau mengajukan permohonan survei faktual mandiri melalui menu Pengajuan Layanan di SAPA SOSIAL.
+          </div>
+</div>
+<!-- FAQ Item 5 -->
+<div class="bg-surface-card rounded-2xl border border-outline-variant/60 overflow-hidden shadow-sm">
+<button class="w-full min-h-[48px] px-6 py-4 text-left flex items-center justify-between font-headline-sm text-headline-sm text-inverse-surface hover:bg-surface-container-low transition-colors" onclick="toggleFaq(this)">
+<span>Bagaimana keluarga lansia terlantar dapat melaporkan via portal?</span>
+<span class="material-symbols-outlined text-2xl transition-transform duration-200" data-icon="expand_more">expand_more</span>
+</button>
+<div class="px-6 pb-5 pt-1 text-body-default font-body-default text-on-surface-variant border-t border-outline-variant/30 hidden">
+            Pilih menu <strong>Rehabilitasi Sosial</strong> &gt; Pengaduan Lansia Terlantar. Petugas respon cepat Satuan Bakti Pekerja Sosial (Sakti Peksos) akan diterjunkan untuk asesmen lapangan dan penyaluran ke rumah singgah terpadu.
+          </div>
+</div>
+</div>
+</section>
+<!-- SECTION: INFORMASI PALING SERING DIAKSES (Popular Links / Guideline) -->
+<section class="py-12 bg-surface-container-low/40 border-t border-outline-variant/30">
+<div class="max-w-7xl mx-auto px-space-md md:px-margin-tablet lg:px-margin-desktop">
+<h2 class="text-headline-md font-headline-md text-inverse-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="trending_up">trending_up</span>
+          Informasi &amp; Panduan Paling Sering Diakses
+        </h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<a class="p-4 rounded-xl bg-surface-card border border-outline-variant/50 hover:border-primary flex items-center justify-between group transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="menu_book">menu_book</span>
+<span class="text-label-md font-label-md text-inverse-surface group-hover:text-primary">Panduan Pendaftaran KIP-Kuliah Jalur DTSEN</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="p-4 rounded-xl bg-surface-card border border-outline-variant/50 hover:border-primary flex items-center justify-between group transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="checklist">checklist</span>
+<span class="text-label-md font-label-md text-inverse-surface group-hover:text-primary">Alur Permohonan Bantuan Kursi Roda Disabilitas</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="p-4 rounded-xl bg-surface-card border border-outline-variant/50 hover:border-primary flex items-center justify-between group transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="download">download</span>
+<span class="text-label-md font-label-md text-inverse-surface group-hover:text-primary">Format Formulir Pernyataan Penghasilan Keluarga</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="p-4 rounded-xl bg-surface-card border border-outline-variant/50 hover:border-primary flex items-center justify-between group transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="help">help</span>
+<span class="text-label-md font-label-md text-inverse-surface group-hover:text-primary">Cara Mengetahui Desil Kesejahteraan Rumah Tangga</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="p-4 rounded-xl bg-surface-card border border-outline-variant/50 hover:border-primary flex items-center justify-between group transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="policy">policy</span>
+<span class="text-label-md font-label-md text-inverse-surface group-hover:text-primary">Standar Operasional Penanganan ODGJ Terlantar</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="p-4 rounded-xl bg-surface-card border border-outline-variant/50 hover:border-primary flex items-center justify-between group transition-all" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="contact_support">contact_support</span>
+<span class="text-label-md font-label-md text-inverse-surface group-hover:text-primary">Daftar Kontak Tenaga Kesejahteraan Sosial Kecamatan</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- SECTION: CONTACT & OFFICE HOURS STRIP -->
+<section class="py-12 bg-surface-card border-t border-outline-variant/30">
+<div class="max-w-7xl mx-auto px-space-md md:px-margin-tablet lg:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-4">
+<h3 class="text-headline-md font-headline-md text-inverse-surface mb-2">Kantor Pelayanan Langsung</h3>
+<p class="text-body-default font-body-default text-on-surface-variant mb-4">
+              Masyarakat dapat mendatangi loket pelayanan terpadu satu pintu Dinas Sosial Kabupaten Blitar untuk konsultasi tatap muka.
+            </p>
+<div class="space-y-3">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="location_on">location_on</span>
+<div>
+<p class="text-label-md font-label-md text-inverse-surface">Alamat Kantor:</p>
+<p class="text-body-default font-body-default text-on-surface-variant">Jl. Merdeka No. 42, Kepanjenkidul, Kec. Kepanjenkidul, Kabupaten Blitar, Jawa Timur 66117</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="schedule">schedule</span>
+<div>
+<p class="text-label-md font-label-md text-inverse-surface">Jam Layanan Loket:</p>
+<p class="text-body-default font-body-default text-on-surface-variant">Senin – Jumat: 08.00 – 15.00 WIB (Istirahat 12.00 – 13.00 WIB)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4">
+<div class="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/60">
+<h4 class="text-headline-sm font-headline-sm text-inverse-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-status-success" data-icon="support_agent">support_agent</span>
+                Saluran Bantuan Langsung
+              </h4>
+<p class="text-caption font-caption text-on-surface-variant mb-4">
+                Butuh bantuan panduan pendaftaran? Hubungi petugas layanan kami via WhatsApp resmi Pemkab Blitar:
+              </p>
+<div class="space-y-2">
+<a class="flex items-center justify-between p-3 rounded-xl bg-surface-card border border-outline-variant/50 hover:bg-surface-container-lowest transition-all" href="https://wa.me/#">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-status-success/15 text-status-success flex items-center justify-center font-bold">WA</span>
+<span class="text-label-md font-label-md text-inverse-surface">Call Center / WA Layanan Sosial</span>
+</div>
+<span class="text-caption font-caption font-bold text-primary">0812-3456-7890</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-xl bg-surface-card border border-outline-variant/50 hover:bg-surface-container-lowest transition-all" href="tel:0342801234">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-primary/15 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="call">call</span>
+</span>
+<span class="text-label-md font-label-md text-inverse-surface">Telepon Kantor (Hunting)</span>
+</div>
+<span class="text-caption font-caption font-bold text-primary">(0342) 801234</span>
+</a>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4">
+<div class="rounded-2xl overflow-hidden border border-outline-variant shadow-sm h-64 relative bg-surface-container">
+<!-- Location Map Image with required prompt and data-location -->
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist vector map illustration centered on Blitar Regency, showcasing smooth cartographic lines, soft municipal green zones, clearly highlighted primary roads, and an accurate government district pin marker. The visual style uses a soft light-mode color palette with gentle teal highlights and crisp road labels. The atmosphere is clear, legible, civic, and welcoming." data-location="Blitar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE1Hgrt0YgU3sPgAGlEKK8lb6IS8O4ZrQImtTa0p2QabpeGYRT7SJiX4xw2ReByoBAm04VCFYrGG2U3MtfXvwTuTB0xN0r4ORCvZrir5sBHLWy-A5sccO7_i9ndCiwEMTIRV3JC990v-G17FwOodzZDFUtc-H39lpMbmCrtPoXNyqDWJwpeVvTMosjjlknOxMrv7-SLwFswbhB4rVhi6esKR17sx2ZQzIP6KSetmamzfNTl5YSIfQ-"/>
+<div class="absolute bottom-3 left-3 right-3 bg-surface-card/95 backdrop-blur-sm p-2.5 rounded-xl border border-outline-variant flex items-center justify-between shadow-sm">
+<div class="text-caption font-caption font-semibold text-inverse-surface truncate">Kompleks Pemkab Blitar</div>
+<a class="text-caption font-caption text-primary hover:underline flex items-center" href="#">Buka Peta <span class="material-symbols-outlined text-xs ml-0.5" data-icon="open_in_new">open_in_new</span></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- WEB FOOTER (Shared Component Execution) -->
+<footer class="docked full-width bottom border-t border-outline dark:border-outline-variant bg-inverse-surface dark:bg-surface-container-lowest text-inverse-on-surface">
+<div class="w-full px-space-md md:px-margin-tablet lg:px-margin-desktop py-space-xl max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10 pb-8 border-b border-surface-container-highest/20">
+<div class="md:col-span-5">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-2xl" data-icon="shield">shield</span>
+</div>
+<div>
+<span class="text-headline-md font-headline-md font-bold text-surface-container-lowest dark:text-inverse-surface">SAPA SOSIAL</span>
+<p class="text-caption font-caption text-surface-container-highest dark:text-on-surface-variant">Satu Pintu Layanan Sosial Kabupaten Blitar</p>
+</div>
+</div>
+<p class="text-caption font-caption text-surface-container-highest dark:text-on-surface-variant max-w-sm mb-4">
+            Portal resmi Dinas Sosial Kabupaten Blitar yang menyediakan akses cepat, adil, dan transparan untuk seluruh masyarakat Kabupaten Blitar.
+          </p>
+<div class="flex items-center gap-3">
+<span class="text-caption font-caption text-surface-container-highest">Terhubung dengan:</span>
+<span class="px-2.5 py-1 rounded bg-inverse-surface/80 border border-surface-container-highest/30 text-caption font-caption text-surface-container-lowest">SP4N-LAPOR!</span>
+<span class="px-2.5 py-1 rounded bg-inverse-surface/80 border border-surface-container-highest/30 text-caption font-caption text-surface-container-lowest">SIKS-NG Kemensos</span>
+</div>
+</div>
+<div class="md:col-span-7">
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+<div>
+<h4 class="text-label-md font-label-md text-surface-container-lowest dark:text-inverse-surface mb-3 font-semibold">Tautan Layanan</h4>
+<ul class="space-y-2 text-caption font-caption">
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#">Beranda</a></li>
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#layanan">Daftar Layanan</a></li>
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#pengaduan">Pengaduan SP4N-LAPOR</a></li>
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#cek-status">Cek Bansos &amp; DTKS</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-surface-container-lowest dark:text-inverse-surface mb-3 font-semibold">Validasi &amp; Dokumen</h4>
+<ul class="space-y-2 text-caption font-caption">
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#verifikasi">Verifikasi SKTM</a></li>
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#verifikasi">Verifikasi Keaslian Surat DTSEN</a></li>
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#">Syarat &amp; Ketentuan</a></li>
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#">Kebijakan Privasi</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-surface-container-lowest dark:text-inverse-surface mb-3 font-semibold">Hubungi Kami</h4>
+<ul class="space-y-2 text-caption font-caption">
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#">Kontak &amp; Jam Pelayanan</a></li>
+<li><a class="text-surface-container-highest dark:text-on-surface-variant transition-colors duration-200 hover:text-primary-fixed dark:hover:text-primary" href="#">Informasi &amp; FAQ</a></li>
+<li><span class="text-surface-container-highest block mt-2">Surel: dinsos@blitarkab.go.id</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Copyright Bottom text exact from JSON -->
+<div class="flex flex-col sm:flex-row items-center justify-between text-caption font-caption text-surface-container-highest/70 gap-2">
+<p>Hak Cipta © 2024 Dinas Sosial Pemerintah Kabupaten Blitar. Seluruh hak cipta dilindungi undang-undang.</p>
+<p>Aplikasi Pelayanan Publik Terpadu Kabupaten Blitar</p>
+</div>
+</div>
+</footer>
+<!-- Micro-Interactions Script -->
+<script>
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    function simulateTracking() {
+      const resultBox = document.getElementById('tracking-result');
+      resultBox.classList.remove('opacity-50');
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+</body></html>
