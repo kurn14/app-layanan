@@ -14,9 +14,10 @@ class LanguageSwitchTest extends TestCase
         Filament::setCurrentPanel(Filament::getPanel('admin'));
         $ls = LanguageSwitch::make();
 
-        $this->assertEquals(['id', 'en'], $ls->getLocales());
+        $this->assertEquals(['id', 'en', 'ar'], $ls->getLocales());
         $this->assertEquals('Indonesia', $ls->getLabels()['id'] ?? null);
         $this->assertEquals('English', $ls->getLabels()['en'] ?? null);
+        $this->assertEquals('العربية', $ls->getLabels()['ar'] ?? null);
         $this->assertTrue($ls->isVisible());
         $this->assertTrue($ls->isVisibleInsidePanels());
     }
@@ -36,6 +37,9 @@ class LanguageSwitchTest extends TestCase
 
         LanguageSwitch::switchLocale('id');
         $this->assertEquals('id', session('locale'));
+
+        LanguageSwitch::switchLocale('ar');
+        $this->assertEquals('ar', session('locale'));
     }
 
     public function test_authenticated_admin_page_renders_language_switch(): void

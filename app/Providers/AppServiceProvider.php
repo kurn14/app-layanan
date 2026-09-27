@@ -22,14 +22,16 @@ class AppServiceProvider extends ServiceProvider
     {
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
-                ->locales(['id', 'en'])
+                ->locales(['id', 'en', 'ar'])
                 ->labels([
                     'id' => 'Indonesia',
                     'en' => 'English',
+                    'ar' => 'العربية',
                 ])
                 ->flags(fn () => [
                     'id' => asset('flags/id.svg'),
                     'en' => asset('flags/en.svg'),
+                    'ar' => asset('flags/ar.svg'),
                 ])
                 ->circular()
                 ->visible(outsidePanels: true);
