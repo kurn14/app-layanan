@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DownloadableFormController;
 use App\Livewire\CertificateVerification;
 use App\Livewire\CitizenAccount;
 use App\Livewire\CitizenAuth;
@@ -49,6 +50,7 @@ Route::livewire('/verifikasi/{code?}', CertificateVerification::class)->name('ve
 
 // 8. Informasi Layanan & FAQ
 Route::livewire('/informasi-faq', InformationFaq::class)->name('informasi-faq');
+Route::get('/formulir/{form}/unduh', [DownloadableFormController::class, 'download'])->name('formulir.download');
 
 // 9. Auth Warga (Masuk & Daftar)
 Route::livewire('/masuk', CitizenAuth::class)->name('masuk');

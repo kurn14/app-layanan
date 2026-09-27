@@ -76,6 +76,11 @@ class Complaint extends Model
         return $this->belongsTo(ComplaintCategory::class, 'complaint_category_id');
     }
 
+    public function complaintCategory(): BelongsTo
+    {
+        return $this->category();
+    }
+
     public function reporter(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reporter_id');

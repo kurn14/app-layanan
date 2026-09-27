@@ -68,6 +68,13 @@ class ComplaintsTable
                         default => 'gray',
                     })
                     ->sortable(),
+                TextColumn::make('attachments_count')
+                    ->counts('attachments')
+                    ->label('Lampiran')
+                    ->badge()
+                    ->color(fn (int $state): string => $state > 0 ? 'success' : 'gray')
+                    ->icon(Heroicon::OutlinedPaperClip)
+                    ->sortable(),
                 TextColumn::make('officer.name')
                     ->label('Petugas PJ')
                     ->placeholder('Belum ada'),

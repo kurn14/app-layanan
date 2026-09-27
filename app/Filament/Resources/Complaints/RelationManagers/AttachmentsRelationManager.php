@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Complaints\RelationManagers;
 
+use App\Models\ComplaintAttachment;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -12,6 +14,7 @@ use Filament\Forms\Components\Select;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -56,13 +59,22 @@ class AttachmentsRelationManager extends RelationManager
             ->columns([
                 ImageColumn::make('file_path')
                     ->label('Pratinjau Foto')
+                    ->disk('public')
+                    ->visibility('public')
                     ->square()
-                    ->size(60),
+                    ->size(60)
+                    ->url(fn (ComplaintAttachment $record) => asset('storage/'.$record->file_path), shouldOpenInNewTab: true),
+                TextColumn::make('file_path')
+                    ->label('Nama Berkas')
+                    ->formatStateUsing(fn ($state) => basename((string) $state))
+                    ->url(fn (ComplaintAttachment $record) => asset('storage/'.$record->file_path), shouldOpenInNewTab: true)
+                    ->color('primary')
+                    ->searchable(),
                 TextColumn::make('type')
                     ->label('Tipe')
                     ->badge()
-                    ->formatStateUsing(fn ($state) => $state === 'photo' ? 'Foto' : 'Dokumen')
-                    ->color(fn ($state) => $state === 'photo' ? 'info' : 'warning'),
+                    ->formatStateUsing(fn ($state) => ($state === 'photo' || (is_object($state) && $state->value === 'photo')) ? 'Foto' : 'Dokumen')
+                    ->color(fn ($state) => ($state === 'photo' || (is_object($state) && $state->value === 'photo')) ? 'info' : 'warning'),
                 TextColumn::make('created_at')
                     ->label('Diunggah')
                     ->dateTime('d M Y H:i')
@@ -72,6 +84,11 @@ class AttachmentsRelationManager extends RelationManager
                 CreateAction::make()->label('Unggah Lampiran'),
             ])
             ->recordActions([
+                Action::make('openFile')
+                    ->label('Buka')
+                    ->icon(Heroicon::OutlinedArrowTopRightOnSquare)
+                    ->color('primary')
+                    ->url(fn (ComplaintAttachment $record) => asset('storage/'.$record->file_path), shouldOpenInNewTab: true),
                 EditAction::make(),
                 DeleteAction::make(),
             ])

@@ -2,7 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Livewire\TicketTracking;
+use App\Models\Complaint;
+use App\Models\DownloadableForm;
 use App\Models\User;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class FrontendPagesTest extends TestCase
@@ -99,5 +103,33 @@ class FrontendPagesTest extends TestCase
         $response = $this->actingAs($user)->get('/akun');
         $response->assertStatus(200);
         $response->assertSee('Akun Saya & Riwayat Berkas');
+    }
+
+    public function test_downloadable_form_can_be_downloaded(): void
+    {
+        $form = DownloadableForm::first();
+
+        $this->assertNotNull($form);
+
+        $response = $this->get(route('formulir.download', $form->id));
+        $response->assertStatus(200);
+        $response->assertHeader('content-type', 'application/pdf');
+    }
+
+    public function test_complaint_ticket_can_be_tracked_with_pin(): void
+    {
+        $complaint = Complaint::with('complaintCategory')->first();
+        $this->assertNotNull($complaint);
+
+        $pin = substr(preg_replace('/[^0-9]/', '', $complaint->reporter_phone), -4);
+
+        Livewire::test(TicketTracking::class)
+            ->set('ticket', $complaint->complaint_number)
+            ->set('pin', $pin)
+            ->call('track')
+            ->assertHasNoErrors()
+            ->assertSet('complaint.complaint_number', $complaint->complaint_number)
+            ->assertSee($complaint->complaint_number)
+            ->assertSee($complaint->complaintCategory?->name);
     }
 }

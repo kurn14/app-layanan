@@ -228,10 +228,26 @@ class PbiApplication extends Component
                 'submitted_at' => now(),
             ]);
 
+            // Fetch service requirements
+            $requirements = $serviceType->requirements;
+            $ktpReq = $requirements->first(fn ($r) => str_contains(strtolower($r->name), 'ktp'))
+                ?? $requirements->firstWhere('sort_order', 1)
+                ?? $requirements->first();
+            $kkReq = $requirements->first(fn ($r) => str_contains(strtolower($r->name), 'kk') || str_contains(strtolower($r->name), 'kartu keluarga'))
+                ?? $requirements->firstWhere('sort_order', 2)
+                ?? $requirements->skip(1)->first();
+            $bpjsReq = $requirements->first(fn ($r) => str_contains(strtolower($r->name), 'bpjs') || str_contains(strtolower($r->name), 'kis'))
+                ?? $requirements->firstWhere('sort_order', 3)
+                ?? $requirements->skip(2)->first();
+            $faskesReq = $requirements->first(fn ($r) => str_contains(strtolower($r->name), 'faskes') || str_contains(strtolower($r->name), 'rawat') || str_contains(strtolower($r->name), 'medis'))
+                ?? $requirements->firstWhere('sort_order', 4)
+                ?? $requirements->skip(3)->first();
+
             // Save KTP Document
             $ktpPath = $this->ktp_file->store('service_documents/'.$request->id, 'local');
             ServiceRequestDocument::create([
                 'service_request_id' => $request->id,
+                'service_requirement_id' => $ktpReq?->id,
                 'file_path' => $ktpPath,
                 'original_name' => $this->ktp_file->getClientOriginalName(),
                 'verification_status' => 'pending',
@@ -241,6 +257,7 @@ class PbiApplication extends Component
             $kkPath = $this->kk_file->store('service_documents/'.$request->id, 'local');
             ServiceRequestDocument::create([
                 'service_request_id' => $request->id,
+                'service_requirement_id' => $kkReq?->id,
                 'file_path' => $kkPath,
                 'original_name' => $this->kk_file->getClientOriginalName(),
                 'verification_status' => 'pending',
@@ -250,6 +267,7 @@ class PbiApplication extends Component
             $bpjsPath = $this->bpjs_file->store('service_documents/'.$request->id, 'local');
             ServiceRequestDocument::create([
                 'service_request_id' => $request->id,
+                'service_requirement_id' => $bpjsReq?->id,
                 'file_path' => $bpjsPath,
                 'original_name' => $this->bpjs_file->getClientOriginalName(),
                 'verification_status' => 'pending',
@@ -260,6 +278,7 @@ class PbiApplication extends Component
                 $faskesPath = $this->faskes_file->store('service_documents/'.$request->id, 'local');
                 ServiceRequestDocument::create([
                     'service_request_id' => $request->id,
+                    'service_requirement_id' => $faskesReq?->id,
                     'file_path' => $faskesPath,
                     'original_name' => $this->faskes_file->getClientOriginalName(),
                     'verification_status' => 'pending',

@@ -109,7 +109,7 @@ class ComplaintSubmission extends Component
                     ? ComplaintAttachmentType::PHOTO
                     : ComplaintAttachmentType::DOCUMENT;
 
-                $path = $this->attachment_file->store('complaint_attachments/'.$record->id, 'local');
+                $path = $this->attachment_file->store('complaint-attachments/'.$record->id, 'public');
                 ComplaintAttachment::create([
                     'complaint_id' => $record->id,
                     'file_path' => $path,

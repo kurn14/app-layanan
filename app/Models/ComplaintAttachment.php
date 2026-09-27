@@ -28,4 +28,16 @@ class ComplaintAttachment extends Model
     {
         return $this->belongsTo(Complaint::class);
     }
+
+    public function getUrlAttribute(): string
+    {
+        return asset('storage/'.$this->file_path);
+    }
+
+    public function getIsImageAttribute(): bool
+    {
+        $ext = strtolower(pathinfo($this->file_path, PATHINFO_EXTENSION));
+
+        return in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif']);
+    }
 }

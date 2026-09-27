@@ -18,6 +18,13 @@ class InformationFaq extends Component
 
     public string $activeSection = 'faq'; // faq, forms, articles
 
+    public function download(int $id)
+    {
+        $form = DownloadableForm::findOrFail($id);
+
+        return redirect()->route('formulir.download', $form);
+    }
+
     public function render(): View
     {
         $faqQuery = Faq::where('is_active', true)->orderBy('sort_order');

@@ -86,7 +86,7 @@ class TicketTracking extends Component
 
         // 2. Try finding in Complaint
         $cp = Complaint::where('complaint_number', $ticketClean)
-            ->with(['complaintCategory', 'village.district', 'statusHistories' => function ($q) {
+            ->with(['complaintCategory', 'village.district', 'attachments', 'statusHistories' => function ($q) {
                 $q->orderBy('created_at', 'desc');
             }])
             ->first();

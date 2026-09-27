@@ -327,6 +327,44 @@
                     </div>
                 </div>
 
+                @if($complaint->attachments->isNotEmpty())
+                    <div class="mt-6 pt-6 border-t border-slate-100">
+                        <span class="text-slate-600 font-bold text-xs mb-3 flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-base text-primary">photo_library</span>
+                            Foto &amp; Lampiran Pendukung:
+                        </span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            @foreach($complaint->attachments as $att)
+                                @php
+                                    $ext = strtolower(pathinfo($att->file_path, PATHINFO_EXTENSION));
+                                    $isImg = in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif']);
+                                    $url = asset('storage/' . $att->file_path);
+                                    $fileName = basename($att->file_path);
+                                @endphp
+                                <div class="border border-slate-200 rounded-xl overflow-hidden bg-slate-50 p-2 flex flex-col gap-2 shadow-2xs hover:shadow-xs transition">
+                                    @if($isImg)
+                                        <div class="aspect-video w-full rounded-lg overflow-hidden bg-slate-200">
+                                            <img src="{{ $url }}" alt="Bukti Lampiran" class="w-full h-full object-cover" loading="lazy" />
+                                        </div>
+                                    @else
+                                        <div class="aspect-video w-full rounded-lg bg-slate-200 flex flex-col items-center justify-center text-slate-500 gap-1">
+                                            <span class="material-symbols-outlined text-3xl">description</span>
+                                            <span class="text-[10px] uppercase font-bold text-slate-400">{{ $ext ?: 'DOKUMEN' }}</span>
+                                        </div>
+                                    @endif
+                                    <div class="flex items-center justify-between text-xs px-1">
+                                        <span class="font-medium text-slate-700 truncate max-w-[140px] font-mono text-[11px]" title="{{ $fileName }}">{{ $fileName }}</span>
+                                        <a href="{{ $url }}" target="_blank" class="text-primary hover:underline font-semibold flex items-center gap-0.5 text-xs">
+                                            <span>Buka</span>
+                                            <span class="material-symbols-outlined text-xs">open_in_new</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
                 @if($complaint->action_taken)
                     <div class="mt-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs">
                         <span class="font-bold text-emerald-900 block mb-1">Tindakan Penanganan Petugas:</span>

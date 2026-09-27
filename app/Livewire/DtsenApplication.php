@@ -217,10 +217,20 @@ class DtsenApplication extends Component
                 'submitted_at' => now(),
             ]);
 
+            // Fetch service requirements
+            $requirements = $serviceType->requirements;
+            $ktpRequirement = $requirements->first(fn ($r) => str_contains(strtolower($r->name), 'ktp'))
+                ?? $requirements->firstWhere('sort_order', 1)
+                ?? $requirements->first();
+            $kkRequirement = $requirements->first(fn ($r) => str_contains(strtolower($r->name), 'kk') || str_contains(strtolower($r->name), 'kartu keluarga'))
+                ?? $requirements->firstWhere('sort_order', 2)
+                ?? $requirements->skip(1)->first();
+
             // Save KTP Document
             $ktpPath = $this->ktp_file->store('service_documents/'.$request->id, 'local');
             ServiceRequestDocument::create([
                 'service_request_id' => $request->id,
+                'service_requirement_id' => $ktpRequirement?->id,
                 'file_path' => $ktpPath,
                 'original_name' => $this->ktp_file->getClientOriginalName(),
                 'verification_status' => 'pending',
@@ -230,6 +240,7 @@ class DtsenApplication extends Component
             $kkPath = $this->kk_file->store('service_documents/'.$request->id, 'local');
             ServiceRequestDocument::create([
                 'service_request_id' => $request->id,
+                'service_requirement_id' => $kkRequirement?->id,
                 'file_path' => $kkPath,
                 'original_name' => $this->kk_file->getClientOriginalName(),
                 'verification_status' => 'pending',

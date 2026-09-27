@@ -36,7 +36,8 @@ class DocumentsRelationManager extends RelationManager
                     Select::make('service_requirement_id')
                         ->label('Jenis Persyaratan')
                         ->relationship('requirement', 'name')
-                        ->required(),
+                        ->nullable()
+                        ->placeholder('Pilih persyaratan (opsional)...'),
                     TextInput::make('original_name')
                         ->label('Nama File Asli')
                         ->required()
@@ -72,6 +73,7 @@ class DocumentsRelationManager extends RelationManager
                     ->label('Persyaratan')
                     ->badge()
                     ->color('primary')
+                    ->placeholder('Dokumen Tambahan')
                     ->searchable(),
                 TextColumn::make('original_name')
                     ->label('Nama File')

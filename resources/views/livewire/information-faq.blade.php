@@ -94,53 +94,35 @@
             <p class="text-xs text-on-surface-variant mb-6">Unduh format surat pernyataan atau formulir pengajuan fisik:</p>
 
             <div class="space-y-3">
-                <div class="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-teal-100 text-primary flex items-center justify-center">
-                            <span class="material-symbols-outlined text-xl">description</span>
+                @forelse ($forms as $form)
+                    @php
+                        $ext = strtoupper(pathinfo($form->file_path ?? 'pdf', PATHINFO_EXTENSION) ?: 'PDF');
+                        $fileSize = 'PDF';
+                        if ($form->file_path && \Illuminate\Support\Facades\Storage::disk('public')->exists($form->file_path)) {
+                            $bytes = \Illuminate\Support\Facades\Storage::disk('public')->size($form->file_path);
+                            $fileSize = round($bytes / 1024, 1) . ' KB';
+                        }
+                    @endphp
+                    <div class="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-teal-100 text-primary flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">description</span>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-900">{{ $form->name }}</h4>
+                                <span class="text-[11px] text-slate-400">Versi {{ $form->version ?? '1.0' }} &bull; {{ $ext }} ({{ $fileSize }})</span>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="text-xs font-bold text-slate-900">Formulir Permohonan Surat Keterangan DTSEN</h4>
-                            <span class="text-[11px] text-slate-400">Versi 2.0 &bull; PDF (245 KB)</span>
-                        </div>
+                        <a href="{{ route('formulir.download', $form->id) }}" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold text-xs hover:bg-primary-container flex items-center gap-1.5 shadow-xs transition-colors">
+                            <span class="material-symbols-outlined text-sm">download</span>
+                            <span>Unduh</span>
+                        </a>
                     </div>
-                    <a href="#" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold text-xs hover:bg-primary-container flex items-center gap-1.5 shadow-xs">
-                        <span class="material-symbols-outlined text-sm">download</span>
-                        <span>Unduh</span>
-                    </a>
-                </div>
-
-                <div class="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-xl">description</span>
-                        </div>
-                        <div>
-                            <h4 class="text-xs font-bold text-slate-900">Format Surat Pernyataan Kebenaran Data Reaktivasi PBI-JK</h4>
-                            <span class="text-[11px] text-slate-400">Versi 1.4 &bull; DOCX (180 KB)</span>
-                        </div>
+                @empty
+                    <div class="p-8 text-center border border-slate-200 rounded-xl text-slate-500 text-xs">
+                        Belum ada formulir resmi yang tersedia untuk diunduh saat ini.
                     </div>
-                    <a href="#" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold text-xs hover:bg-primary-container flex items-center gap-1.5 shadow-xs">
-                        <span class="material-symbols-outlined text-sm">download</span>
-                        <span>Unduh</span>
-                    </a>
-                </div>
-
-                <div class="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition-colors">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-xl">description</span>
-                        </div>
-                        <div>
-                            <h4 class="text-xs font-bold text-slate-900">Formulir Laporan Kasus PPKS &amp; Klien Terlantar</h4>
-                            <span class="text-[11px] text-slate-400">Versi 1.1 &bull; PDF (320 KB)</span>
-                        </div>
-                    </div>
-                    <a href="#" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold text-xs hover:bg-primary-container flex items-center gap-1.5 shadow-xs">
-                        <span class="material-symbols-outlined text-sm">download</span>
-                        <span>Unduh</span>
-                    </a>
-                </div>
+                @endforelse
             </div>
         </div>
     @endif

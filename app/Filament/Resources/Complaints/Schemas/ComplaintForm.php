@@ -3,13 +3,16 @@
 namespace App\Filament\Resources\Complaints\Schemas;
 
 use App\Enums\ComplaintStatus;
+use App\Models\Complaint;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Support\HtmlString;
 
 class ComplaintForm
 {
@@ -70,6 +73,33 @@ class ComplaintForm
                             ->placeholder('Jelaskan kondisi orang/keluarga yang membutuhkan penanganan')
                             ->required()
                             ->rows(4)
+                            ->columnSpanFull(),
+                    ]),
+
+                Section::make('Lampiran Foto & Bukti Pendukung')
+                    ->description('Dokumentasi foto kejadian dan bukti fisik yang dilaporkan warga')
+                    ->schema([
+                        Placeholder::make('attachments_list')
+                            ->label('')
+                            ->content(function (?Complaint $record): HtmlString {
+                                if (! $record) {
+                                    return new HtmlString('<p class="text-xs text-gray-500 italic">Lampiran foto atau berkas dapat dilihat setelah data laporan tersimpan.</p>');
+                                }
+
+                                $record->loadMissing('attachments');
+                                $attachments = $record->attachments;
+
+                                if ($attachments->isEmpty()) {
+                                    return new HtmlString('
+                                        <div class="flex items-center gap-2 p-4 rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-xs">
+                                            <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                            <span>Tidak ada lampiran foto atau dokumen yang diunggah oleh pelapor.</span>
+                                        </div>
+                                    ');
+                                }
+
+                                return new HtmlString(view('filament.components.complaint-attachments', ['attachments' => $attachments])->render());
+                            })
                             ->columnSpanFull(),
                     ]),
 
