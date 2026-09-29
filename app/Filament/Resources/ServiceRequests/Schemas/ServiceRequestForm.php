@@ -51,13 +51,15 @@ class ServiceRequestForm
                             TextInput::make('applicant_nik')
                                 ->label('NIK Pemohon (16 Digit)')
                                 ->required()
-                                ->length(16)
-                                ->numeric(),
+                                ->maxLength(16)
+                                ->rule('digits:16')
+                                ->extraInputAttributes(['inputmode' => 'numeric', 'pattern' => '[0-9]*']),
                             TextInput::make('family_card_number')
                                 ->label('Nomor Kartu Keluarga (KK)')
                                 ->required()
-                                ->length(16)
-                                ->numeric(),
+                                ->maxLength(16)
+                                ->rule('digits:16')
+                                ->extraInputAttributes(['inputmode' => 'numeric', 'pattern' => '[0-9]*']),
                             TextInput::make('phone')
                                 ->label('Nomor Telepon / WhatsApp')
                                 ->tel()
@@ -107,8 +109,9 @@ class ServiceRequestForm
                             TextInput::make('subject_nik')
                                 ->label('NIK Orang yang Diterangkan')
                                 ->required()
-                                ->length(16)
-                                ->numeric(),
+                                ->maxLength(16)
+                                ->rule('digits:16')
+                                ->extraInputAttributes(['inputmode' => 'numeric', 'pattern' => '[0-9]*']),
                             Select::make('relationship_to_applicant')
                                 ->label('Hubungan dengan Pemohon')
                                 ->options([
@@ -173,8 +176,9 @@ class ServiceRequestForm
                             TextInput::make('participant_nik')
                                 ->label('NIK Peserta')
                                 ->required()
-                                ->length(16)
-                                ->numeric(),
+                                ->maxLength(16)
+                                ->rule('digits:16')
+                                ->extraInputAttributes(['inputmode' => 'numeric', 'pattern' => '[0-9]*']),
                             TextInput::make('bpjs_card_number')
                                 ->label('Nomor Kartu BPJS / KIS (13 Digit)')
                                 ->required()

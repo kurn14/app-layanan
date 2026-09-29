@@ -39,6 +39,7 @@ class DtsenCertificate extends Model
             'checked_at' => 'datetime',
             'issued_at' => 'datetime',
             'valid_until' => 'date',
+            'subject_nik' => 'string',
         ];
     }
 

@@ -29,6 +29,7 @@ class Client extends Model
         return [
             'birth_date' => 'date',
             'gender' => Gender::class,
+            'nik' => 'string',
         ];
     }
 

@@ -46,6 +46,8 @@ class ServiceRequest extends Model
             'is_priority' => 'boolean',
             'submitted_at' => 'datetime',
             'completed_at' => 'datetime',
+            'applicant_nik' => 'string',
+            'family_card_number' => 'string',
         ];
     }
 

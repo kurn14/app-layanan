@@ -45,6 +45,7 @@ class PbiReactivation extends Model
             'ministry_decision' => MinistryDecision::class,
             'ministry_decided_at' => 'datetime',
             'reactivated_date' => 'date',
+            'participant_nik' => 'string',
         ];
     }
 

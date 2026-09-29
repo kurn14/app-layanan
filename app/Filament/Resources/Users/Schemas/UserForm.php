@@ -37,6 +37,7 @@ class UserForm
                             TextInput::make('password')
                                 ->label('Password')
                                 ->password()
+                                ->autocomplete('new-password')
                                 ->dehydrateStateUsing(fn ($state) => filled($state) ? Hash::make($state) : null)
                                 ->dehydrated(fn ($state) => filled($state))
                                 ->required(fn (string $operation): bool => $operation === 'create')
@@ -47,8 +48,9 @@ class UserForm
                                 ->maxLength(20),
                             TextInput::make('nik')
                                 ->label('NIK (16 Digit)')
-                                ->length(16)
-                                ->numeric(),
+                                ->maxLength(16)
+                                ->rule('digits:16')
+                                ->extraInputAttributes(['inputmode' => 'numeric', 'pattern' => '[0-9]*']),
                             Toggle::make('is_active')
                                 ->label('Akun Aktif')
                                 ->default(true)

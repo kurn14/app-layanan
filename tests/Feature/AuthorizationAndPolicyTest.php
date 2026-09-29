@@ -2,11 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Filament\Resources\Users\Pages\EditUser;
 use App\Models\Approval;
 use App\Models\Complaint;
 use App\Models\DtsenCertificate;
 use App\Models\ServiceRequest;
 use App\Models\User;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class AuthorizationAndPolicyTest extends TestCase
@@ -100,5 +102,21 @@ class AuthorizationAndPolicyTest extends TestCase
 
             $this->assertTrue($approver->can('approve', $pendingApproval->approvable));
         }
+    }
+
+    public function test_user_edit_saves_16_digit_nik_as_string_without_scientific_notation(): void
+    {
+        $admin = User::where('email', 'adi@adi.com')->first();
+        $targetUser = User::where('email', 'kadis@dinsos.blitarkab.go.id')->first();
+
+        Livewire::actingAs($admin)
+            ->test(EditUser::class, ['record' => $targetUser->id])
+            ->fillForm([
+                'nik' => '3505061504680001',
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertEquals('3505061504680001', $targetUser->fresh()->nik);
     }
 }

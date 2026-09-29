@@ -33,8 +33,9 @@ class ClientForm
                                 ->required(),
                             TextInput::make('nik')
                                 ->label('NIK Klien (Bila ada)')
-                                ->length(16)
-                                ->numeric(),
+                                ->maxLength(16)
+                                ->rule('digits:16')
+                                ->extraInputAttributes(['inputmode' => 'numeric', 'pattern' => '[0-9]*']),
                             DatePicker::make('birth_date')
                                 ->label('Tanggal Lahir')
                                 ->maxDate(now()),
