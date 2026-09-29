@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             WorkUnitSeeder::class,
             DistrictAndVillageSeeder::class,
             UserSeeder::class,
+            RolePermissionSeeder::class,
             DtsenPurposeSeeder::class,
             ServiceTypeSeeder::class,
             ClientCategorySeeder::class,

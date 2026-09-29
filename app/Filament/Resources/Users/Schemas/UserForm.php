@@ -56,6 +56,20 @@ class UserForm
                         ]),
                     ]),
 
+                Section::make('Peran & Hak Akses (Role)')
+                    ->description('Tentukan peran akun. Hanya pengguna dengan role yang dapat mengakses Panel Admin.')
+                    ->schema([
+                        Select::make('roles')
+                            ->label('Peran / Role Pengguna')
+                            ->relationship('roles', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable()
+                            ->placeholder('Pilih role untuk pengguna')
+                            ->helperText('Pengguna tanpa role dianggap sebagai Warga / Pengunjung portal publik dan tidak dapat masuk ke Panel Admin.')
+                            ->columnSpanFull(),
+                    ]),
+
                 Section::make('Penugasan & Wilayah')
                     ->description('Unit kerja kedinasan atau wilayah penugasan operator desa/kecamatan')
                     ->schema([

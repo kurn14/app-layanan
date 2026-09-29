@@ -30,6 +30,16 @@ class UsersTable
                 TextColumn::make('phone')
                     ->label('Telepon / WA')
                     ->searchable(),
+                TextColumn::make('roles.name')
+                    ->label('Peran / Role')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'administrator' => 'danger',
+                        'operator' => 'primary',
+                        'pimpinan' => 'success',
+                        default => 'gray',
+                    })
+                    ->placeholder('Warga (Tanpa Role)'),
                 TextColumn::make('workUnit.name')
                     ->label('Unit Kerja')
                     ->badge()
@@ -56,6 +66,10 @@ class UsersTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                SelectFilter::make('roles')
+                    ->label('Filter Role')
+                    ->relationship('roles', 'name')
+                    ->preload(),
                 SelectFilter::make('work_unit_id')
                     ->label('Filter Unit Kerja')
                     ->relationship('workUnit', 'name'),
