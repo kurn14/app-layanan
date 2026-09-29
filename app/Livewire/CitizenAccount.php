@@ -27,14 +27,22 @@ class CitizenAccount extends Component
     {
         $user = Auth::user();
 
-        $serviceRequests = ServiceRequest::where('submitter_id', $user->id)
-            ->orWhere('applicant_nik', $user->nik)
+        $serviceRequests = ServiceRequest::where(function ($q) use ($user) {
+            $q->where('submitter_id', $user->id);
+            if (! empty($user->nik)) {
+                $q->orWhere('applicant_nik', $user->nik);
+            }
+        })
             ->with(['serviceType', 'village.district'])
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $complaints = Complaint::where('reporter_id', $user->id)
-            ->orWhere('reporter_phone', $user->phone)
+        $complaints = Complaint::where(function ($q) use ($user) {
+            $q->where('reporter_id', $user->id);
+            if (! empty($user->phone)) {
+                $q->orWhere('reporter_phone', $user->phone);
+            }
+        })
             ->with(['complaintCategory', 'village.district'])
             ->orderBy('created_at', 'desc')
             ->get();

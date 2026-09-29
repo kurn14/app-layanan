@@ -76,6 +76,37 @@ class ServiceRequestResource extends Resource
         ];
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        $user = auth()->user();
+
+        if (! $user) {
+            return $query;
+        }
+
+        // Administrator dan Pimpinan melihat semua data
+        if ($user->hasRole('administrator') || $user->hasRole('pimpinan')) {
+            return $query;
+        }
+
+        // Operator wilayah desa
+        if ($user->village_id) {
+            return $query->where('village_id', $user->village_id);
+        }
+
+        // Operator wilayah kecamatan (semua desa di kecamatannya)
+        if ($user->district_id) {
+            return $query->whereHas('village', fn (Builder $q) => $q->where('district_id', $user->district_id));
+        }
+
+        // Operator dinas sosial (kantor pusat tanpa batas wilayah)
+        return $query->where(fn (Builder $q) => $q
+            ->where('officer_id', $user->id)
+            ->orWhere('work_unit_id', $user->work_unit_id)
+        );
+    }
+
     public static function getRecordRouteBindingEloquentQuery(): Builder
     {
         return parent::getRecordRouteBindingEloquentQuery()

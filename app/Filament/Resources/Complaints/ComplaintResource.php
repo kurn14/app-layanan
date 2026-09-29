@@ -76,6 +76,40 @@ class ComplaintResource extends Resource
         ];
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        $user = auth()->user();
+
+        if (! $user) {
+            return $query;
+        }
+
+        // Administrator dan Pimpinan melihat semua data
+        if ($user->hasRole('administrator') || $user->hasRole('pimpinan')) {
+            return $query;
+        }
+
+        // Operator wilayah desa
+        if ($user->village_id) {
+            return $query->where('village_id', $user->village_id);
+        }
+
+        // Operator wilayah kecamatan
+        if ($user->district_id) {
+            return $query->where(function (Builder $q) use ($user) {
+                $q->where('district_id', $user->district_id)
+                    ->orWhereHas('village', fn (Builder $sub) => $sub->where('district_id', $user->district_id));
+            });
+        }
+
+        // Operator dinas sosial (kantor pusat)
+        return $query->where(fn (Builder $q) => $q
+            ->where('assigned_to', $user->id)
+            ->orWhereNull('assigned_to')
+        );
+    }
+
     public static function getRecordRouteBindingEloquentQuery(): Builder
     {
         return parent::getRecordRouteBindingEloquentQuery()

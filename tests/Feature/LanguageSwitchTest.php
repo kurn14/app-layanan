@@ -47,6 +47,7 @@ class LanguageSwitchTest extends TestCase
         $user = User::factory()->create([
             'is_active' => true,
         ]);
+        $user->assignRole('administrator');
 
         $response = $this->actingAs($user)->get('/admin');
 

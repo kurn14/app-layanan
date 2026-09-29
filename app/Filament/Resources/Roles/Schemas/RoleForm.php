@@ -11,6 +11,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleForm
 {
@@ -28,7 +29,11 @@ class RoleForm
                                 ->required()
                                 ->maxLength(255)
                                 ->unique(ignoreRecord: true)
-                                ->helperText('Gunakan huruf kecil atau snake_case untuk konsistensi sistem.'),
+                                ->disabled(fn (?Role $record): bool => $record && in_array($record->name, ['administrator', 'operator', 'pimpinan']))
+                                ->helperText(fn (?Role $record): string => $record && in_array($record->name, ['administrator', 'operator', 'pimpinan'])
+                                    ? 'Nama role bawaan sistem (administrator, operator, pimpinan) tidak dapat diubah agar otorisasi sistem tetap konsisten.'
+                                    : 'Gunakan huruf kecil atau snake_case untuk konsistensi sistem.'
+                                ),
                             Hidden::make('guard_name')
                                 ->default('web'),
                         ]),

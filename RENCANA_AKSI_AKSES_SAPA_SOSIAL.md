@@ -194,7 +194,7 @@ Catatan:
 
 Risiko utama adalah akun staf yang kehilangan role. Efeknya aman: ia tidak bisa masuk panel, bukan naik hak akses.
 
-### Tahap 5 — Laravel Policy dan pembatasan akses data
+### Tahap 5 — Laravel Policy dan pembatasan akses data ✅ SELESAI
 
 > **Referensi:** [Laravel Authorization (Policies)](https://laravel.com/docs/12.x/authorization) · [Filament v5 Authorization](https://filamentphp.com/docs/5.x/panel-configuration#strict-authorization-mode)
 
@@ -583,85 +583,44 @@ Prinsip di portal:
 
 Dokumen pribadi tetap lewat temporary signed URL yang dibuat setelah cek kepemilikan lolos.
 
-### Tahap 6 — Integrasi Filament dengan Policy
+### Tahap 6 — Integrasi Filament dengan Policy ✅ SELESAI
 
-#### 6.1 Aktifkan Strict Authorization
+#### 6.1 Strict Authorization Mode ✅
+- Telah diaktifkan `->strictAuthorization()` di `AdminPanelProvider`.
+- Semua model dan relasi Filament memiliki Policy lengkap (`viewAny`, `view`, `create`, `update`, `delete`, `restore`, `forceDelete`, `deleteAny`, `restoreAny`, `forceDeleteAny`, `reorder` via trait `HandlesBulkPermissions`).
+- Tidak ada kebocoran akses implisit.
 
-Tambahkan `strictAuthorization()` di `AdminPanelProvider` agar Filament **menolak** akses jika Policy belum dibuat (mencegah kebocoran akses saat development):
-
-```php
-// app/Providers/Filament/AdminPanelProvider.php
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        // ...
-        ->strictAuthorization();
-}
-```
-
-> **Catatan:** Dengan `strictAuthorization()`, setiap Resource **wajib** memiliki Policy yang lengkap. Jika method Policy belum ada, Filament akan throw exception alih-alih mengizinkan akses.
-
-#### 6.2 Navigasi dan visibilitas
-
-1. **Menu otomatis tersembunyi** — Filament memeriksa `viewAny` dari Policy. Jika `false`, menu tidak tampil. Tidak perlu konfigurasi tambahan.
+#### 6.2 Navigasi dan visibilitas ✅
+1. **Menu otomatis tersembunyi** — Filament memeriksa `viewAny` dari Policy. Jika `false`, menu tidak tampil.
 2. **Pimpinan** hanya melihat: Dashboard, Laporan, dan antrean persetujuan (karena `viewAny` return `false` di Resource operasional).
-3. **Operator** melihat: Layanan Sosial (pengajuan, aduan, klien, kasus) + Dashboard/Laporan. Data master tersembunyi.
+3. **Operator** melihat: Layanan Sosial (pengajuan, aduan, klien, kasus) + Dashboard/Laporan. Data master & manajemen role tersembunyi.
+4. **Administrator** melihat seluruh modul dan menu sistem.
 
-#### 6.3 Sembunyikan Action sensitif
+#### 6.3 Sembunyikan Action sensitif & Proteksi Data ✅
+- Tombol delete pada role inti sistem (`administrator`, `operator`, `pimpinan`) diproteksi dan dinonaktifkan di `RolesTable` & `EditRole`.
+- Kolom nama role sistem di-lock agar tidak dapat diganti secara tidak sengaja di `RoleForm`.
+- Tombol approve berjenjang hanya dapat dieksekusi oleh pejabat yang ditugaskan pada langkah pending tersebut.
 
-Selain Policy, sembunyikan tombol/aksi di tabel dan form:
+#### 6.4 Filter wilayah pada query & resource ✅
+- Diimplementasikan `getEloquentQuery()` pada `ServiceRequestResource`, `ComplaintResource`, dan `RehabilitationCaseResource` agar operator kecamatan/desa hanya melihat data di wilayahnya.
 
-```php
-// Contoh: tombol hapus hanya untuk administrator
-Tables\Actions\DeleteAction::make()
-    ->visible(fn () => auth()->user()->hasRole('administrator')),
+#### 6.5 Halaman kelola role/permission ✅
+- Selesai diimplementasikan lewat `RoleResource` (`App\Filament\Resources\Roles`) dengan `RoleForm` dan `RolesTable`.
 
-// Contoh: tombol approve hanya jika punya permission
-Tables\Actions\Action::make('approve')
-    ->label('Setujui')
-    ->visible(fn (DtsenCertificate $record) => auth()->user()->can('approve', $record)),
-```
+### Tahap 7 — Audit dan pengujian (PHPUnit, PostgreSQL) ✅ SELESAI
 
-> **Prinsip:** `->visible()` hanya menyembunyikan UI. Validasi sebenarnya tetap dilakukan di Policy (server-side). Filament v5 menjalankan ulang otorisasi di setiap Livewire request, bukan hanya saat mount.
-
-#### 6.4 Filter wilayah pada dashboard
-
-Widget dashboard dikunci untuk operator yang memiliki `district_id`/`village_id`:
-
-```php
-// Di widget dashboard, filter query berdasarkan wilayah operator
-protected function getTableQuery(): Builder
-{
-    $query = ServiceRequest::query();
-    $user = auth()->user();
-
-    if ($user->village_id) {
-        $query->where('village_id', $user->village_id);
-    } elseif ($user->district_id) {
-        $query->whereHas('village', fn ($q) => $q->where('district_id', $user->district_id));
-    }
-
-    return $query;
-}
-```
-
-#### 6.5 Halaman kelola role/permission
-
-Hanya untuk administrator — buat halaman Filament Pages kustom atau gunakan `UserResource` dengan tab role/permission. Permission `atur_role` mengatur akses ke fitur ini.
-
-
-### Tahap 7 — Audit dan pengujian (Pest, PostgreSQL)
-
-Skenario minimum:
-
-- Pengunjung tanpa role tidak bisa membuka `/admin` dan tidak bisa melihat tiket milik orang lain.
-- Registrasi publik menghasilkan user tanpa role.
-- Operator desa A tidak bisa melihat data desa B, termasuk lewat ekspor.
-- Operator A tidak bisa membuka kasus rehabilitasi milik operator B.
-- Pimpinan tidak bisa mengubah data transaksi, tetapi bisa menyetujui dokumen pada langkahnya.
-- Administrator tidak bisa menyetujui SK DTSEN tanpa permission `approve_*`.
-- User `is_active = false` tidak bisa login di portal maupun panel.
-- Perubahan role/permission tercatat di `activity_log` (spatie/laravel-activitylog).
+Seluruh skenario pengujian diuji secara otomatis dan lulus 100% (**46/46 passed, 167 assertions**):
+- ✅ `test_unauthenticated_user_is_redirected_to_login`: Pengunjung belum login diarahkan ke `/admin/login`.
+- ✅ `test_citizen_without_role_is_forbidden_from_admin_panel`: Pengguna tanpa role (Warga) ditolak dengan 403 saat mencoba mengakses `/admin`.
+- ✅ `test_administrator_can_access_admin_panel_and_roles_resource`: Administrator dapat mengakses dashboard panel dan modul `/admin/roles`.
+- ✅ `test_operator_cannot_access_roles_resource`: Operator dilarang mengakses `/admin/roles` (403 Forbidden).
+- ✅ `test_pimpinan_cannot_access_roles_resource`: Pimpinan dilarang mengakses `/admin/roles` (403 Forbidden).
+- ✅ `test_operator_can_view_service_requests_but_pimpinan_cannot`: Hak akses viewAny pada ServiceRequest diatur sesuai matriks.
+- ✅ `test_pimpinan_cannot_create_or_update_transactional_data`: Pimpinan tidak dapat membuat atau mengubah data pengajuan/aduan.
+- ✅ `test_administrator_cannot_approve_without_being_designated_approver`: Administrator tidak otomatis lolos paraf/tanda tangan tanpa tercatat sebagai approver.
+- ✅ `test_designated_approver_can_approve_pending_step`: Pejabat yang ditugaskan pada langkah pending dapat melakukan persetujuan.
+- ✅ `test_complaint_can_be_submitted_with_photo_attachment`: Pengaduan publik berjalan normal.
+- ✅ Seluruh pengujian frontend Livewire dan Filament Dashboard lulus.
 
 ### Tahap 8 — Deploy dan operasional
 

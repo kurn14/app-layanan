@@ -76,6 +76,24 @@ class RehabilitationCaseResource extends Resource
         ];
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        $user = auth()->user();
+
+        if (! $user) {
+            return $query;
+        }
+
+        // Administrator dan Pimpinan melihat semua data
+        if ($user->hasRole('administrator') || $user->hasRole('pimpinan')) {
+            return $query;
+        }
+
+        // Operator hanya melihat kasus yang ditugaskan kepadanya
+        return $query->where('officer_id', $user->id);
+    }
+
     public static function getRecordRouteBindingEloquentQuery(): Builder
     {
         return parent::getRecordRouteBindingEloquentQuery()

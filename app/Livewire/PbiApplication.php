@@ -249,7 +249,7 @@ class PbiApplication extends Component
                 'service_request_id' => $request->id,
                 'service_requirement_id' => $ktpReq?->id,
                 'file_path' => $ktpPath,
-                'original_name' => $this->ktp_file->getClientOriginalName(),
+                'original_name' => mb_convert_encoding($this->ktp_file->getClientOriginalName(), 'UTF-8', 'UTF-8'),
                 'verification_status' => 'pending',
             ]);
 
@@ -259,7 +259,7 @@ class PbiApplication extends Component
                 'service_request_id' => $request->id,
                 'service_requirement_id' => $kkReq?->id,
                 'file_path' => $kkPath,
-                'original_name' => $this->kk_file->getClientOriginalName(),
+                'original_name' => mb_convert_encoding($this->kk_file->getClientOriginalName(), 'UTF-8', 'UTF-8'),
                 'verification_status' => 'pending',
             ]);
 
@@ -269,7 +269,7 @@ class PbiApplication extends Component
                 'service_request_id' => $request->id,
                 'service_requirement_id' => $bpjsReq?->id,
                 'file_path' => $bpjsPath,
-                'original_name' => $this->bpjs_file->getClientOriginalName(),
+                'original_name' => mb_convert_encoding($this->bpjs_file->getClientOriginalName(), 'UTF-8', 'UTF-8'),
                 'verification_status' => 'pending',
             ]);
 
@@ -280,7 +280,7 @@ class PbiApplication extends Component
                     'service_request_id' => $request->id,
                     'service_requirement_id' => $faskesReq?->id,
                     'file_path' => $faskesPath,
-                    'original_name' => $this->faskes_file->getClientOriginalName(),
+                    'original_name' => mb_convert_encoding($this->faskes_file->getClientOriginalName(), 'UTF-8', 'UTF-8'),
                     'verification_status' => 'pending',
                 ]);
             }
