@@ -11,6 +11,8 @@ use App\Models\Disposition;
 use App\Models\RehabilitationCase;
 use App\Models\User;
 use App\Models\WorkUnit;
+use App\Services\Export\ComplaintExcelExport;
+use App\Services\Export\ComplaintPdfExport;
 use App\Services\StatusTransitionService;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -279,6 +281,27 @@ class ComplaintsTable
                             Notification::make()->info()->title('Laporan ditandai duplikat')->send();
                         }),
                 ]),
+            ])
+            ->headerActions([
+                Action::make('exportExcel')
+                    ->label('Ekspor Excel')
+                    ->icon(Heroicon::OutlinedArrowDownTray)
+                    ->color('success')
+                    ->visible(fn () => auth()->user()?->can('ekspor_laporan'))
+                    ->action(fn ($livewire) => (new ComplaintExcelExport(
+                        $livewire->tableFilters ?? [],
+                        $livewire->getFilteredTableQuery()
+                    ))->download()),
+
+                Action::make('exportPdf')
+                    ->label('Ekspor PDF')
+                    ->icon(Heroicon::OutlinedDocumentArrowDown)
+                    ->color('danger')
+                    ->visible(fn () => auth()->user()?->can('ekspor_laporan'))
+                    ->action(fn ($livewire) => (new ComplaintPdfExport(
+                        $livewire->tableFilters ?? [],
+                        $livewire->getFilteredTableQuery()
+                    ))->download()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

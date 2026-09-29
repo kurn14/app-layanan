@@ -6,6 +6,8 @@ use App\Enums\ServiceRequestStatus;
 use App\Models\Approval;
 use App\Models\NumberSequence;
 use App\Models\ServiceRequest;
+use App\Services\Export\ServiceRequestExcelExport;
+use App\Services\Export\ServiceRequestPdfExport;
 use App\Services\StatusTransitionService;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -522,6 +524,27 @@ class ServiceRequestsTable
                             Notification::make()->danger()->title('Pengajuan telah ditolak')->send();
                         }),
                 ]),
+            ])
+            ->headerActions([
+                Action::make('exportExcel')
+                    ->label('Ekspor Excel')
+                    ->icon(Heroicon::OutlinedArrowDownTray)
+                    ->color('success')
+                    ->visible(fn () => auth()->user()?->can('ekspor_laporan'))
+                    ->action(fn ($livewire) => (new ServiceRequestExcelExport(
+                        $livewire->tableFilters ?? [],
+                        $livewire->getFilteredTableQuery()
+                    ))->download()),
+
+                Action::make('exportPdf')
+                    ->label('Ekspor PDF')
+                    ->icon(Heroicon::OutlinedDocumentArrowDown)
+                    ->color('danger')
+                    ->visible(fn () => auth()->user()?->can('ekspor_laporan'))
+                    ->action(fn ($livewire) => (new ServiceRequestPdfExport(
+                        $livewire->tableFilters ?? [],
+                        $livewire->getFilteredTableQuery()
+                    ))->download()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

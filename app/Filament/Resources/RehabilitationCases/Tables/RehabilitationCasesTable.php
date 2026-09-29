@@ -4,6 +4,8 @@ namespace App\Filament\Resources\RehabilitationCases\Tables;
 
 use App\Enums\RehabilitationCaseStatus;
 use App\Models\RehabilitationCase;
+use App\Services\Export\RehabilitationCaseExcelExport;
+use App\Services\Export\RehabilitationCasePdfExport;
 use App\Services\StatusTransitionService;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -158,6 +160,27 @@ class RehabilitationCasesTable
                             Notification::make()->success()->title('Kasus rehabilitasi telah berhasil ditutup')->send();
                         }),
                 ]),
+            ])
+            ->headerActions([
+                Action::make('exportExcel')
+                    ->label('Ekspor Excel')
+                    ->icon(Heroicon::OutlinedArrowDownTray)
+                    ->color('success')
+                    ->visible(fn () => auth()->user()?->can('ekspor_laporan'))
+                    ->action(fn ($livewire) => (new RehabilitationCaseExcelExport(
+                        $livewire->tableFilters ?? [],
+                        $livewire->getFilteredTableQuery()
+                    ))->download()),
+
+                Action::make('exportPdf')
+                    ->label('Ekspor PDF')
+                    ->icon(Heroicon::OutlinedDocumentArrowDown)
+                    ->color('danger')
+                    ->visible(fn () => auth()->user()?->can('ekspor_laporan'))
+                    ->action(fn ($livewire) => (new RehabilitationCasePdfExport(
+                        $livewire->tableFilters ?? [],
+                        $livewire->getFilteredTableQuery()
+                    ))->download()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

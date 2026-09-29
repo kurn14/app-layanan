@@ -35,6 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
                 'Layanan Sosial',
                 'Pusat Informasi',
+                'Laporan & Rekapitulasi',
                 'Data Master',
                 'Pengguna & Sistem',
             ])

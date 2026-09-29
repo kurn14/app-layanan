@@ -45,6 +45,7 @@ class RolePermissionSeeder extends Seeder
             PermissionType::ManageRehabilitationCase->value,
             PermissionType::ViewDashboard->value,
             PermissionType::ViewReport->value,
+            PermissionType::ExportReport->value,
         ]);
 
         // Pimpinan: persetujuan berjenjang, dashboard, serta laporan & ekspor

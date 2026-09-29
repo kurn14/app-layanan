@@ -25,6 +25,10 @@ class DashboardQueryService
 
     protected ?string $status = null;
 
+    protected ?int $complaintCategoryId = null;
+
+    protected ?string $handlingType = null;
+
     protected ?int $districtId = null;
 
     protected ?int $villageId = null;
@@ -50,6 +54,14 @@ class DashboardQueryService
 
         if (! empty($filters['status'])) {
             $this->status = (string) $filters['status'];
+        }
+
+        if (! empty($filters['complaint_category_id'])) {
+            $this->complaintCategoryId = (int) $filters['complaint_category_id'];
+        }
+
+        if (! empty($filters['handling_type'])) {
+            $this->handlingType = (string) $filters['handling_type'];
         }
 
         // Terapkan pembatasan wilayah berdasarkan peran pengguna
@@ -260,6 +272,10 @@ class DashboardQueryService
             $query->where('status', $this->status);
         }
 
+        if ($this->complaintCategoryId) {
+            $query->where('complaint_category_id', $this->complaintCategoryId);
+        }
+
         if ($this->villageId) {
             $query->where('village_id', $this->villageId);
         } elseif ($this->districtId) {
@@ -291,6 +307,10 @@ class DashboardQueryService
 
         if ($this->status) {
             $query->where('status', $this->status);
+        }
+
+        if ($this->handlingType) {
+            $query->where('handling_type', $this->handlingType);
         }
 
         if ($this->villageId || $this->districtId) {
